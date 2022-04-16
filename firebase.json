@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "cchabbe-4f653",
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

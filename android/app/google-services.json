@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "511992243163",
+    "project_id": "cchabbe-4f653",
+    "storage_bucket": "cchabbe-4f653.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511992243163:android:43419b25a371b5685b7dfe",
+        "android_client_info": {
+          "package_name": "com.company.cchabbe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511992243163-u3oqhorqsb0mrq9hvngklkachclp6jbd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArpRNi7YsbLE9ewLo6IQ-2ryL8M5tAexw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511992243163-u3oqhorqsb0mrq9hvngklkachclp6jbd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
