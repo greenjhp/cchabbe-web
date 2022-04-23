@@ -1,36 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'login_view.dart';
+import 'channel_list_view.dart';
+import 'create_channel_view.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      // initialRoute: "/login",
+      routes: <String, WidgetBuilder>{
+        '/login': (context) => LoginView(),
+        '/channel_list': (context) => ChannelListView(),
+        '/create_channel': (context) => CreateChannelView(),
+      },
+      home: const MyHomePage(title: 'Cchabbe'),
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          fontFamily: "Gellix",
+          primaryColor: Color(0xff742DDD),
+          buttonColor: Color(0xff742DDD),
+          textTheme: TextTheme(
+              headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+              headline6:
+                  TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold)),
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: Color(0xff732cdd),
+            selectionHandleColor: Color(0xff732cdd),
+            selectionColor: Color(0xffD1BAF4),
+          )),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -48,19 +60,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -95,21 +94,15 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Image.asset('assets/images/cchabbe.png'),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                child: Text('차주와 채팅하기'))
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
