@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'direct_to_channel.dart';
 import 'login_view.dart';
 import 'channel_list_view.dart';
 import 'create_channel_view.dart';
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // initialRoute: "/login",
       routes: <String, WidgetBuilder>{
-        '/login': (context) => LoginView(),
+        '/direct_to_channel': (context) => DirectToChannel(),
+        // '/login': (context) => LoginView(),
         '/channel_list': (context) => ChannelListView(),
         '/create_channel': (context) => CreateChannelView(),
       },
@@ -97,7 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Image.asset('assets/images/cchabbe.png'),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  Navigator.pushNamed(context, '/direct_to_channel');
+                  // Navigator.pushNamed(context, '/login');
                 },
                 child: Text('차주와 채팅하기'))
           ],

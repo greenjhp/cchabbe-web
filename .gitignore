@@ -48,3 +48,7 @@ app.*.map.json
 # Google Services (ex. APIs and Firebase)
 google-services.json
 GoogleService-Info.plist
+
+# key
+sendbird_info.json
+sendbird_info.dart
