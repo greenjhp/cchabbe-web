@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'group_channel_view.dart';
@@ -13,10 +14,27 @@ class DirectToChannel extends StatefulWidget {
 }
 
 class DirectToChannelState extends State<DirectToChannel> {
+  // Get Sendbird App Id
   final _appIdController =
       TextEditingController(text: SendbirdInfo.sendbird_app_id);
-  final _userIdController = TextEditingController(text: "angryMa");
-  final _nicknameController = TextEditingController(text: "마음급한 마동석");
+
+  // Random Generate Sendbird UserId
+  static String _chars =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  static Random _rnd = Random();
+
+  static String getRandomString() => String.fromCharCodes(Iterable.generate(
+      10, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+
+  static get temp_user_id => 'tempUser_' + getRandomString();
+
+  final _userIdController = TextEditingController(text: temp_user_id);
+
+  // Generate Sendbird Sendbird Nickname
+  String currentNickname = generateRancomNickname();
+  final _nicknameController = TextEditingController();
+
+  //
   bool _enableSignInButton = false;
 
   @override
@@ -32,6 +50,33 @@ class DirectToChannelState extends State<DirectToChannel> {
         padding: EdgeInsets.only(left: 20, right: 20, top: 100),
         child: Column(
           children: [
+            Text(
+              """차주에게 쎄 보일\n닉네임을 정해보세요""",
+              style: TextStyle(fontSize: 20.0),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  currentNickname = generateRancomNickname();
+                });
+              },
+              icon: Icon(Icons.refresh),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            TextField(
+              controller: _nicknameController..text = currentNickname,
+              style: TextStyle(fontSize: 20.0),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 30,
+            ),
             FractionallySizedBox(
               widthFactor: 1,
               child: _signInButton(context, _enableSignInButton),
@@ -126,18 +171,51 @@ Future<GroupChannel> createChannel(List<String> userIds) async {
   }
 }
 
+String generateRancomNickname() {
+  // Generate Sendbird Sendbird Nickname
+  List _name_part1 = [
+    '마음급한',
+    '힘쎈',
+    '태권도19단',
+    '험상궂은',
+    '치명적인',
+    '헤비급',
+    '주짓수블랙벨트',
+    '원펀맨',
+    '캡틴',
+    '사커킥'
+  ];
+  List _name_part2 = [
+    '마동석',
+    '곽두팔',
+    '마봉팔',
+    '오태식',
+    '모팔모',
+    '강철날개',
+    '어금니',
+    '송곳니',
+    '금니빨',
+    '만두귀'
+  ];
+
+  Random _rnd1 = Random();
+  Random _rnd2 = Random();
+
+  // generate a random index based on the list length
+  // and use it to retrieve the element
+  String RndNickName = _name_part1[_rnd1.nextInt(_name_part1.length)] +
+      ' ' +
+      _name_part2[_rnd2.nextInt(_name_part2.length)];
+
+  return RndNickName;
+}
+
 // Future<String> readJson() async {
 //   String response =
 //       await rootBundle.loadString('assets/credentials/sendbird_info.json');
 //   final data = json.decode(response);
 //   return data['sendbird_app_id'];
 // }
-
-
-
-
-
-
 
 //   Widget navigationBar() {
 //     return AppBar(
@@ -224,7 +302,3 @@ Future<GroupChannel> createChannel(List<String> userIds) async {
 //     }
 //     return true;
 //   }
-
-  
-
-
