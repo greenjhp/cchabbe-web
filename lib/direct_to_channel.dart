@@ -1,14 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'group_channel_view.dart';
 import 'package:sendbird_sdk/sendbird_sdk.dart';
 import 'sendbird_info.dart';
 
 class DirectToChannel extends StatefulWidget {
+  const DirectToChannel({Key key}) : super(key: key);
+
   @override
   DirectToChannelState createState() => DirectToChannelState();
 }
@@ -26,9 +25,9 @@ class DirectToChannelState extends State<DirectToChannel> {
   static String getRandomString() => String.fromCharCodes(Iterable.generate(
       10, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
-  static get temp_user_id => 'tempUser_' + getRandomString();
+  static get tempUserId => 'tempUser_' + getRandomString();
 
-  final _userIdController = TextEditingController(text: temp_user_id);
+  final _userIdController = TextEditingController(text: tempUserId);
 
   // Generate Sendbird Sendbird Nickname
   String currentNickname = generateRancomNickname();
@@ -130,15 +129,13 @@ class DirectToChannelState extends State<DirectToChannel> {
               ),
             );
           }).catchError((error) {
-            print(
+            debugPrint(
                 'create_channel_view: navigationBar: createChannel: ERROR: $error');
           });
           // Navigator.pushNamed(context, '/create_channel');
         }).catchError((error) {
-          print('login_view: _signInButton: ERROR: $error');
+          debugPrint('login_view: _signInButton: ERROR: $error');
         });
-
-        ;
       },
       child: Text(
         "차주와 채팅 시작",
@@ -154,7 +151,7 @@ class DirectToChannelState extends State<DirectToChannel> {
       final user = await sendbird.connect(userId, nickname: nickname);
       return user;
     } catch (e) {
-      print('login_view: connect: ERROR: $e');
+      debugPrint('login_view: connect: ERROR: $e');
       throw e;
     }
   }
@@ -166,14 +163,14 @@ Future<GroupChannel> createChannel(List<String> userIds) async {
     final channel = await GroupChannel.createChannel(params);
     return channel;
   } catch (e) {
-    print('createChannel: ERROR: $e');
+    debugPrint('createChannel: ERROR: $e');
     throw e;
   }
 }
 
 String generateRancomNickname() {
   // Generate Sendbird Sendbird Nickname
-  List _name_part1 = [
+  List _namePart1 = [
     '마음급한',
     '힘쎈',
     '태권도19단',
@@ -185,7 +182,7 @@ String generateRancomNickname() {
     '캡틴',
     '사커킥'
   ];
-  List _name_part2 = [
+  List _namePart2 = [
     '마동석',
     '곽두팔',
     '마봉팔',
@@ -203,11 +200,11 @@ String generateRancomNickname() {
 
   // generate a random index based on the list length
   // and use it to retrieve the element
-  String RndNickName = _name_part1[_rnd1.nextInt(_name_part1.length)] +
+  String rndNickName = _namePart1[_rnd1.nextInt(_namePart1.length)] +
       ' ' +
-      _name_part2[_rnd2.nextInt(_name_part2.length)];
+      _namePart2[_rnd2.nextInt(_namePart2.length)];
 
-  return RndNickName;
+  return rndNickName;
 }
 
 // Future<String> readJson() async {
