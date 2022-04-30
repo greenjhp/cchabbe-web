@@ -114,7 +114,7 @@ class LoginViewState extends State<LoginView> {
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(Colors.grey),
             foregroundColor:
-                MaterialStateProperty.all<Color>(Colors.grey[300])),
+                MaterialStateProperty.all<Color>(Colors.grey[300]!)),
         onPressed: () {},
         child: Text(
           "Sign In",

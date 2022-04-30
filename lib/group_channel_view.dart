@@ -5,7 +5,7 @@ import 'dart:async';
 
 class GroupChannelView extends StatefulWidget {
   final GroupChannel groupChannel;
-  GroupChannelView({Key key, @required this.groupChannel}) : super(key: key);
+  GroupChannelView({Key? key, required this.groupChannel}) : super(key: key);
 
   @override
   _GroupChannelViewState createState() => _GroupChannelViewState();
@@ -54,7 +54,7 @@ class _GroupChannelViewState extends State<GroupChannelView>
     );
   }
 
-  Widget navigationBar(GroupChannel channel) {
+  PreferredSizeWidget navigationBar(GroupChannel channel) {
     return AppBar(
       automaticallyImplyLeading: true,
       backgroundColor: Colors.white,
@@ -71,7 +71,7 @@ class _GroupChannelViewState extends State<GroupChannelView>
   }
 
   Widget body(BuildContext context) {
-    ChatUser user = asDashChatUser(SendbirdSdk().currentUser);
+    ChatUser user = asDashChatUser(SendbirdSdk().currentUser!);
     return Padding(
       // A little breathing room for devices with no home button.
       padding: const EdgeInsets.fromLTRB(8, 8, 8, 40),
@@ -82,7 +82,7 @@ class _GroupChannelViewState extends State<GroupChannelView>
         key: Key(widget.groupChannel.channelUrl),
         onSend: (ChatMessage message) async {
           var sentMessage =
-              widget.groupChannel.sendUserMessageWithText(message.text);
+              widget.groupChannel.sendUserMessageWithText(message.text!);
           setState(() {
             _messages.add(sentMessage);
           });
@@ -93,10 +93,10 @@ class _GroupChannelViewState extends State<GroupChannelView>
         messages: asDashChatMessages(_messages),
         inputDecoration:
             InputDecoration.collapsed(hintText: "Type a message here..."),
-        messageDecorationBuilder: (ChatMessage msg, bool isUser) {
+        messageDecorationBuilder: (ChatMessage msg, bool? isUser) {
           return BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            color: isUser
+            color: isUser!
                 ? Theme.of(context).primaryColor
                 : Colors.grey[200], // example
           );
@@ -111,7 +111,7 @@ class _GroupChannelViewState extends State<GroupChannelView>
     List<ChatMessage> result = [];
     if (messages != null) {
       messages.forEach((message) {
-        User user = message.sender;
+        User user = message.sender!;
         if (user == null) {
           return;
         }

@@ -6,7 +6,7 @@ import 'package:sendbird_sdk/sendbird_sdk.dart';
 import 'sendbird_info.dart';
 
 class DirectToChannel extends StatefulWidget {
-  const DirectToChannel({Key key}) : super(key: key);
+  const DirectToChannel({Key? key}) : super(key: key);
 
   @override
   DirectToChannelState createState() => DirectToChannelState();
@@ -102,7 +102,7 @@ class DirectToChannelState extends State<DirectToChannel> {
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(Colors.grey),
             foregroundColor:
-                MaterialStateProperty.all<Color>(Colors.grey[300])),
+                MaterialStateProperty.all<Color>(Colors.grey[300]!)),
         onPressed: () {},
         child: Text(
           "Sign In",

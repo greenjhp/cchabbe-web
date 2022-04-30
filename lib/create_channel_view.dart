@@ -56,7 +56,7 @@ class _CreateChannelViewState extends State<CreateChannelView> {
     );
   }
 
-  Widget navigationBar() {
+  PreferredSizeWidget navigationBar() {
     return AppBar(
       automaticallyImplyLeading: true,
       backgroundColor: Colors.white,
@@ -114,11 +114,11 @@ class _CreateChannelViewState extends State<CreateChannelView> {
             value: _selectedUsers.contains(user),
             // value: SendbirdSdk().currentUser.userId == user.userId,
             activeColor: Theme.of(context).primaryColor,
-            onChanged: (bool value) {
+            onChanged: (value) {
               // Using a set to store which users we want to create
               // a channel with.
               setState(() {
-                if (value) {
+                if (value!) {
                   _selectedUsers.add(user);
                 } else {
                   _selectedUsers.remove(user);
@@ -127,7 +127,7 @@ class _CreateChannelViewState extends State<CreateChannelView> {
                     'create_channel_view: on change for: ${user.nickname} _selectedUsers: $_selectedUsers');
               });
             },
-            secondary: user.profileUrl.isEmpty
+            secondary: user.profileUrl!.isEmpty
                 ? CircleAvatar(
                     child: Text(
                     (user.nickname.isEmpty ? user.userId : user.nickname)
@@ -135,7 +135,7 @@ class _CreateChannelViewState extends State<CreateChannelView> {
                         .toUpperCase(),
                   ))
                 : CircleAvatar(
-                    backgroundImage: NetworkImage(user.profileUrl),
+                    backgroundImage: NetworkImage(user.profileUrl!),
                   ),
           );
         });

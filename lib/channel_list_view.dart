@@ -71,7 +71,7 @@ class _ChannelListViewState extends State<ChannelListView>
     );
   }
 
-  Widget navigationBar() {
+  PreferredSizeWidget navigationBar() {
     return AppBar(
       automaticallyImplyLeading: true,
       backgroundColor: Colors.white,
@@ -103,7 +103,7 @@ class _ChannelListViewState extends State<ChannelListView>
           // Nothing to display yet - good place for a loading indicator
           return Container();
         }
-        List<GroupChannel> channels = snapshot.data;
+        List<GroupChannel> channels = snapshot.data as List<GroupChannel>;
         return ListView.builder(
             itemCount: channels.length,
             itemBuilder: (context, index) {
